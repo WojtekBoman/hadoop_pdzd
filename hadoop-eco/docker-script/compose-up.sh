@@ -73,6 +73,7 @@ do
     extra_hosts:
       - "mariadb:10.0.2.2"
       - "master:10.0.2.3"
+      - "ftpslave:10.0.2.7"
 '$ip_addr
   if [[ ! $slave -eq $slaves ]]
   then
@@ -83,6 +84,30 @@ done
 
 cat << EOF > docker-compose.yml
 services:
+  ftp:
+    image: fauria/vsftpd
+    hostname: ftpslave
+    container_name: ftpslave
+    privileged: true
+    ports:
+      - "20:20"
+      - "21:21"
+      - "21100-21110:21100-21110"
+    environment:
+      FTP_USER: ftp
+      FTP_PASS: ftp
+      PASV_ADDRESS: 127.0.0.1
+      PASV_MIN_PORT: 21100
+      PASV_MAX_PORT: 21110
+    volumes:
+      - ./files:/home/vsftpd
+    networks:
+      hadoop-cluster:
+       ipv4_address: 10.0.2.7
+    extra_hosts:
+      - "mariadb:10.0.2.2"
+      - "master:10.0.2.3"
+      - "ftpslave:10.0.2.7"
   mariadb:
     image: hjben/mariadb:10.5
     hostname: mariadb
@@ -101,6 +126,7 @@ services:
     extra_hosts:
       - "mariadb:10.0.2.2"
       - "master:10.0.2.3"
+      - "ftpslave:10.0.2.7"
 $ip_addr
   master:
     image: hjben/hadoop-eco:$hadoop_version
@@ -127,6 +153,7 @@ $ip_addr
     extra_hosts:
       - "mariadb:10.0.2.2"
       - "master:10.0.2.3"
+      - "ftpslave:10.0.2.7"
 $ip_addr
 $slave_service
 networks:

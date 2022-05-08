@@ -96,7 +96,6 @@ services:
     environment:
       FTP_USER: ftp
       FTP_PASS: ftp
-      PASV_ADDRESS: 127.0.0.1
       PASV_MIN_PORT: 21100
       PASV_MAX_PORT: 21110
     volumes:

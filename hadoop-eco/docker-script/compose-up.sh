@@ -67,6 +67,7 @@ do
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup
       - '$hbase_log_path'/slave'$slave':/usr/local/hbase/logs
+      - ./files/pdzd:/pdzd
     networks:
       hadoop-cluster:
         ipv4_address: 10.0.2.'$(($slave + 3))'
@@ -96,8 +97,6 @@ services:
     environment:
       FTP_USER: ftp
       FTP_PASS: ftp
-      PASV_MIN_PORT: 21100
-      PASV_MAX_PORT: 21110
     volumes:
       - ./files:/home/vsftpd
     networks:
@@ -116,7 +115,7 @@ services:
       - 3306:3306
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup
-      - $maria_data_path:/var/lib/mysql 
+      - $maria_data_path:/var/lib/mysql
     environment:
       MARIADB_ROOT_PASSWORD: $maria_root_password
     networks:
@@ -146,6 +145,7 @@ $ip_addr
       - $hbase_log_path/master:/usr/local/hbase/logs
       - $hive_log_path:/usr/local/hive/logs
       - $sqoop_log_path:/usr/local/sqoop/logs
+      - ./files/pdzd:/pdzd
     networks:
       hadoop-cluster:
         ipv4_address: 10.0.2.3

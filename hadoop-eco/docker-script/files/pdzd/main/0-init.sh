@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-RF=$1
 CARS_DIR=cars
 GEO_DIR=geo
 
-checkDirectoryExists() {
+checkDirectoriesExist() {
   echo "Looking for existing directories."
   CARS_C=$(hdfs dfs -ls / | grep cars | wc -l)
   GEO_C=$(hdfs dfs -ls / | grep geo | wc -l)
@@ -26,16 +25,14 @@ checkDirectoryExists() {
   fi
 }
 
-createCarsWithReplication() {
-  echo "Creating cars directory with ${RF} replicas."
+createCars() {
+  echo "Creating cars directory."
   hdfs dfs -mkdir -p /${CARS_DIR}
-  hdfs dfs -setrep -w ${RF} /${CARS_DIR}
 }
 
-createGeoWithReplication() {
-  echo "Creating geo directory with ${RF} replicas."
+createGeo() {
+  echo "Creating geo directory."
   hdfs dfs -mkdir -p /${GEO_DIR}
-  hdfs dfs -setrep -w ${RF} /${GEO_DIR}
 }
 
 cleanCars() {
@@ -47,6 +44,6 @@ cleanGeo() {
   echo "Removing geo directory."
   hdfs dfs -rm -r /${GEO_DIR}
 }
-checkDirectoryExists
-createCarsWithReplication
-createGeoWithReplication
+checkDirectoriesExist
+createCars
+createGeo

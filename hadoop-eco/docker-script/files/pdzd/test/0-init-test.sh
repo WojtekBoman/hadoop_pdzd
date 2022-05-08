@@ -54,7 +54,7 @@ verifyReplication() {
   if [[ ($CARS_RC == "$RF" && $GEO_RC == "$RF") ]]; then
     echo "Replication is set correctly."
   else
-    echo "Replication is not set correctly."
+    echo "Replication is not set correctly ($CARS_RC instead of $RF)."
   fi
 }
 

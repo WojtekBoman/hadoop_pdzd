@@ -63,6 +63,8 @@ services:
       - /tmp/hive_logs:/usr/local/hive/logs
       - /tmp/sqoop_logs:/usr/local/sqoop/logs
       - ./files/pdzd:/pdzd
+      - ../hbase/conf/hbase-site.xml:/usr/local/hbase-1.6.0/conf/hbase-site.xml
+      - ../../hadoop/conf/hdfs-site.xml:/usr/local/hadoop-3.3.0/etc/hadoop/hdfs-site.xml
     networks:
       hadoop-cluster:
         ipv4_address: 10.0.2.3
@@ -85,6 +87,8 @@ services:
       - /sys/fs/cgroup:/sys/fs/cgroup
       - /tmp/hbase_logs/slave1:/usr/local/hbase/logs
       - ./files/pdzd:/pdzd
+      - ../hbase/conf/hbase-site.xml:/usr/local/hbase/conf/hbase-site.xml
+      - ../../hadoop/conf/hdfs-site.xml:/usr/local/hadoop-3.3.0/etc/hadoop/hdfs-site.xml
     networks:
       hadoop-cluster:
         ipv4_address: 10.0.2.4
@@ -107,6 +111,8 @@ services:
       - /sys/fs/cgroup:/sys/fs/cgroup
       - /tmp/hbase_logs/slave2:/usr/local/hbase/logs
       - ./files/pdzd:/pdzd
+      - ../hbase/conf/hbase-site.xml:/usr/local/hbase/conf/hbase-site.xml
+      - ../../hadoop/conf/hdfs-site.xml:/usr/local/hadoop-3.3.0/etc/hadoop/hdfs-site.xml
     networks:
       hadoop-cluster:
         ipv4_address: 10.0.2.5
@@ -129,6 +135,8 @@ services:
       - /sys/fs/cgroup:/sys/fs/cgroup
       - /tmp/hbase_logs/slave3:/usr/local/hbase/logs
       - ./files/pdzd:/pdzd
+      - ../hbase/conf/hbase-site.xml:/usr/local/hbase/conf/hbase-site.xml
+      - ../../hadoop/conf/hdfs-site.xml:/usr/local/hadoop-3.3.0/etc/hadoop/hdfs-site.xml
     networks:
       hadoop-cluster:
         ipv4_address: 10.0.2.6

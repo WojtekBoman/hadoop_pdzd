@@ -68,6 +68,8 @@ do
       - /sys/fs/cgroup:/sys/fs/cgroup
       - '$hbase_log_path'/slave'$slave':/usr/local/hbase/logs
       - ./files/pdzd:/pdzd
+      - ../hbase/conf/hbase-site.xml:/usr/local/hbase/conf/hbase-site.xml
+      - ../../hadoop/conf/hdfs-site.xml:/usr/local/hadoop-3.3.0/etc/hadoop/hdfs-site.xml
     networks:
       hadoop-cluster:
         ipv4_address: 10.0.2.'$(($slave + 3))'
@@ -146,6 +148,8 @@ $ip_addr
       - $hive_log_path:/usr/local/hive/logs
       - $sqoop_log_path:/usr/local/sqoop/logs
       - ./files/pdzd:/pdzd
+      - ../hbase/conf/hbase-site.xml:/usr/local/hbase-1.6.0/conf/hbase-site.xml
+      - ../../hadoop/conf/hdfs-site.xml:/usr/local/hadoop-3.3.0/etc/hadoop/hdfs-site.xml
     networks:
       hadoop-cluster:
         ipv4_address: 10.0.2.3

@@ -1,4 +1,4 @@
-.PHONY: up down start init test
+.PHONY: up down start init test mapreduce
 
 up:
 	./compose-up.sh 3.3.0 3 /tmp/hadoop /tmp/hadoop_logs /tmp/hbase_logs /tmp/hive_logs /tmp/sqoop_logs mariadb /tmp/maria
@@ -14,3 +14,6 @@ init:
 
 test:
 	docker exec -it master /pdzd/test/0-init-test.sh
+	
+mapreduce:
+	docker exec -it master /pdzd/test/0-mapreduce.sh

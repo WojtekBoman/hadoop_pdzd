@@ -69,4 +69,4 @@ downloadTestFile
 putToHDFS
 verifyPut
 verifyReplication
-removeTestFiles
+#removeTestFiles

@@ -14,7 +14,7 @@ if [ $flag = "meta" ] || [ $flag = "all" ] ; then
   docker exec -it mariadb bash -c "/sh/init.sh"
   
   echo "Password is required to set Meta database and user."
-  docker exec -it mariadb bash -c "mysql -u root -p < /sh/init-hive.sql"
+  docker exec -it mariadb bash -c "mysql -u root -pmariadb < /sh/init-hive.sql"
   docker exec -it master bash -c "/usr/local/hive/bin/schematool -dbType mysql -initSchema"
   echo "Done."
 else
@@ -24,6 +24,7 @@ fi
 if [ $flag = "hdfs" ] || [ $flag = "all" ] ; then
   echo "Initialize HDFS for Hive."
   docker exec -it master bash -c "init-hive-dfs.sh"
+  docker exec -it master hdfs dfs -mkdir /spark-logs
   echo "Done."
 fi
 

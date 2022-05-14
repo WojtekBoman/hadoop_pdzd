@@ -21,6 +21,10 @@ hive-start:
 hive-stop:
 	./hive-stop.sh
 
+spark-start:
+	docker exec -it master start-master.sh
+	docker exec -it master start-history-server.sh
+
 ftp-download:
 	docker exec -it master /pdzd/main/download_files.sh
 

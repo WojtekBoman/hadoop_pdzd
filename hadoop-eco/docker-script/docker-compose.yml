@@ -1,0 +1,162 @@
+services:
+  ftp:
+    image: fauria/vsftpd
+    hostname: ftpslave
+    container_name: ftpslave
+    privileged: true
+    ports:
+      - "20:20"
+      - "21:21"
+      - "21100-21110:21100-21110"
+    environment:
+      FTP_USER: ftp
+      FTP_PASS: ftp
+    volumes:
+      - ./files:/home/vsftpd
+    networks:
+      hadoop-cluster:
+       ipv4_address: 10.0.3.7
+    extra_hosts:
+      - "mariadb:10.0.3.2"
+      - "master:10.0.3.3"
+      - "ftpslave:10.0.3.7"
+  mariadb:
+    image: hjben/mariadb:10.5
+    hostname: mariadb
+    container_name: mariadb
+    privileged: true
+    ports:
+      - 3306:3306
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+#      - /tmp/maria:/var/lib/mysql
+    environment:
+      MARIADB_ROOT_PASSWORD: mariadb
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.3.2
+    extra_hosts:
+      - "mariadb:10.0.3.2"
+      - "master:10.0.3.3"
+      - "ftpslave:10.0.3.7"
+      - "slave1:10.0.3.4"
+      - "slave2:10.0.3.5"
+      - "slave3:10.0.3.6"
+
+  master:
+    build:
+      context: ./images/master
+      dockerfile: Dockerfile
+    image: pdzd/hadoop-eco
+    hostname: master
+    container_name: master
+    privileged: true
+    ports:
+      - 4040:4040
+      - 8088:8088
+      - 9870:9870
+      - 8042:8042
+      - 10000:10000
+      - 10002:10002
+      - 18080:18080
+      - 16010:16010
+      - 50070:50070
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /tmp/hadoop:/data/hadoop
+      - /tmp/hadoop_logs:/usr/local/hadoop/logs
+      - /tmp/hbase_logs/master:/usr/local/hbase/logs
+      - /tmp/hive_logs:/usr/local/hive/logs
+      - /tmp/sqoop_logs:/usr/local/sqoop/logs
+      - ./files/pdzd:/pdzd
+      - ../hbase/conf/hbase-site.xml:/usr/local/hbase-1.6.0/conf/hbase-site.xml
+      - ../../hadoop/conf/hdfs-site.xml:/usr/local/hadoop-3.3.0/etc/hadoop/hdfs-site.xml
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.3.3
+    extra_hosts:
+      - "mariadb:10.0.3.2"
+      - "master:10.0.3.3"
+      - "ftpslave:10.0.3.7"
+      - "slave1:10.0.3.4"
+      - "slave2:10.0.3.5"
+      - "slave3:10.0.3.6"
+
+  slave1:
+    image: hjben/hbase:1.6.0-hadoop3.3.0
+    hostname: slave1
+    container_name: slave1
+    privileged: true
+    ports:
+      - 16030:16030
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /tmp/hbase_logs/slave1:/usr/local/hbase/logs
+      - ./files/pdzd:/pdzd
+      - ../hbase/conf/hbase-site.xml:/usr/local/hbase/conf/hbase-site.xml
+      - ../../hadoop/conf/hdfs-site.xml:/usr/local/hadoop-3.3.0/etc/hadoop/hdfs-site.xml
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.3.4
+    extra_hosts:
+      - "mariadb:10.0.3.2"
+      - "master:10.0.3.3"
+      - "ftpslave:10.0.3.7"
+      - "slave1:10.0.3.4"
+      - "slave2:10.0.3.5"
+      - "slave3:10.0.3.6"
+
+  slave2:
+    image: hjben/hbase:1.6.0-hadoop3.3.0
+    hostname: slave2
+    container_name: slave2
+    privileged: true
+    ports:
+      - 16031:16030
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /tmp/hbase_logs/slave2:/usr/local/hbase/logs
+      - ./files/pdzd:/pdzd
+      - ../hbase/conf/hbase-site.xml:/usr/local/hbase/conf/hbase-site.xml
+      - ../../hadoop/conf/hdfs-site.xml:/usr/local/hadoop-3.3.0/etc/hadoop/hdfs-site.xml
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.3.5
+    extra_hosts:
+      - "mariadb:10.0.3.2"
+      - "master:10.0.3.3"
+      - "ftpslave:10.0.3.7"
+      - "slave1:10.0.3.4"
+      - "slave2:10.0.3.5"
+      - "slave3:10.0.3.6"
+
+  slave3:
+    image: hjben/hbase:1.6.0-hadoop3.3.0
+    hostname: slave3
+    container_name: slave3
+    privileged: true
+    ports:
+      - 16032:16030
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup
+      - /tmp/hbase_logs/slave3:/usr/local/hbase/logs
+      - ./files/pdzd:/pdzd
+      - ../hbase/conf/hbase-site.xml:/usr/local/hbase/conf/hbase-site.xml
+      - ../../hadoop/conf/hdfs-site.xml:/usr/local/hadoop-3.3.0/etc/hadoop/hdfs-site.xml
+    networks:
+      hadoop-cluster:
+        ipv4_address: 10.0.3.6
+    extra_hosts:
+      - "mariadb:10.0.3.2"
+      - "master:10.0.3.3"
+      - "ftpslave:10.0.3.7"
+      - "slave1:10.0.3.4"
+      - "slave2:10.0.3.5"
+      - "slave3:10.0.3.6"
+
+networks:
+ hadoop-cluster:
+  ipam:
+   driver: default
+   config:
+   - subnet: 10.0.3.0/24

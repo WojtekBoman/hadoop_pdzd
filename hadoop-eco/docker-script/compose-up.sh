@@ -130,16 +130,21 @@ services:
       - "ftpslave:10.0.3.7"
 $ip_addr
   master:
-    image: hjben/hadoop-eco:$hadoop_version
+    build:
+      context: ./images/master
+      dockerfile: Dockerfile
+    image: pdzd/hadoop-eco
     hostname: master
     container_name: master
     privileged: true
     ports:
+      - 4040:4040
       - 8088:8088
       - 9870:9870
       - 8042:8042
       - 10000:10000
       - 10002:10002
+      - 18080:18080
       - 16010:16010
       - 50070:50070
     volumes:

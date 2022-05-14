@@ -86,6 +86,7 @@ do
 done
 
 cat << EOF > docker-compose.yml
+version: "3"
 services:
   ftp:
     image: fauria/vsftpd

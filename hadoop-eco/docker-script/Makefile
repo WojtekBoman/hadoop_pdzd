@@ -41,4 +41,4 @@ e7-mapreduce:
 	docker exec -it master /pdzd/test/0-mapreduce.sh
 
 e7-spark:
-	docker exec -it master spark-shell -i /pdzd/test/0-spark-test.scala.sh
+	docker exec -it master /pdzd/test/0-spark-test.scala.sh

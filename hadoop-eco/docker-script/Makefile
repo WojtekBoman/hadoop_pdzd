@@ -1,4 +1,4 @@
-.PHONY: up down start init test mapreduce
+.PHONY: up down hadoop-start hadoop-stop hive-init hive-start hive-stop e7-init e7-test e7-mapreduce
 
 up:
 	./compose-up.sh 3.3.0 3 /tmp/hadoop /tmp/hadoop_logs /tmp/hbase_logs /tmp/hive_logs /tmp/sqoop_logs mariadb /tmp/maria
@@ -6,14 +6,26 @@ up:
 down:
 	./compose-down.sh
 
-start:
-	./hadoop-start.sh start
+hadoop-start:
+	./hadoop-start.sh start &
 
-init:
+hadoop-stop:
+	./hadoop-stop.sh
+
+hive-init:
+	./hive-start.sh all &
+
+hive-start:
+	./hive-start.sh &
+
+hive-stop:
+	./hive-stop.sh
+
+e7-init:
 	docker exec -it master /pdzd/main/0-init.sh
 
-test:
+e7-test:
 	docker exec -it master /pdzd/test/0-init-test.sh
 	
-mapreduce:
+e7-mapreduce:
 	docker exec -it master /pdzd/test/0-mapreduce.sh

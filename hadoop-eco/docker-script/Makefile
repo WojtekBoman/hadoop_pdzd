@@ -21,6 +21,9 @@ hive-start:
 hive-stop:
 	./hive-stop.sh
 
+ftp-download:
+	docker exec -it master /pdzd/main/download_files.sh
+
 e7-init:
 	docker exec -it master /pdzd/main/0-init.sh
 

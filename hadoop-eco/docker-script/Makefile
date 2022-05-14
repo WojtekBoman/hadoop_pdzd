@@ -7,16 +7,16 @@ down:
 	./compose-down.sh
 
 hadoop-start:
-	./hadoop-start.sh start &
+	./hadoop-start.sh start
 
 hadoop-stop:
 	./hadoop-stop.sh
 
 hive-init:
-	./hive-start.sh all &
+	./hive-start.sh all
 
 hive-start:
-	./hive-start.sh &
+	./hive-start.sh
 
 hive-stop:
 	./hive-stop.sh

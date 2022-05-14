@@ -25,6 +25,9 @@ spark-start:
 	docker exec -it master start-master.sh
 	docker exec -it master start-history-server.sh
 
+spark-shell:
+	docker exec -it master spark-shell
+
 ftp-download:
 	docker exec -it master /pdzd/main/download_files.sh
 

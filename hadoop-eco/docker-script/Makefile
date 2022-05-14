@@ -42,3 +42,6 @@ e7-mapreduce:
 
 e7-spark:
 	docker exec -it master /pdzd/test/0-spark-test.sh
+
+e7-hive:
+	docker exec -it master /pdzd/test/0-hive-test.sh

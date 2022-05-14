@@ -1,2 +1,3 @@
 .vagrant
 .idea
+hadoop-eco/docker-script/docker-compose.yml

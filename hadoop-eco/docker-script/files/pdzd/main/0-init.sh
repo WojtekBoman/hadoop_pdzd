@@ -25,6 +25,10 @@ checkDirectoriesExist() {
   fi
 }
 
+setFtpCrontab() {
+  echo "0 * * * * /pdzd/main/download_files.sh" | tee -a /var/spool/cron/root
+}
+
 createCars() {
   echo "Creating cars directory."
   hdfs dfs -mkdir -p /${CARS_DIR}
@@ -47,3 +51,4 @@ cleanGeo() {
 checkDirectoriesExist
 createCars
 createGeo
+#setFtpCrontab

@@ -1,4 +1,4 @@
-.PHONY: up down hadoop-start hadoop-stop hive-init hive-start hive-stop e7-init e7-test e7-mapreduce
+.PHONY: up down hadoop-start hadoop-stop hive-init hive-start hive-stop e7-init e7-test e7-mapreduce spark-shell spark-start e7-spark
 
 up:
 	./compose-up.sh 3.3.0 3 /tmp/hadoop /tmp/hadoop_logs /tmp/hbase_logs /tmp/hive_logs /tmp/sqoop_logs mariadb /tmp/maria
@@ -39,3 +39,6 @@ e7-test:
 	
 e7-mapreduce:
 	docker exec -it master /pdzd/test/0-mapreduce.sh
+
+e7-spark:
+	docker exec -it master spark-shell -i /pdzd/test/0-spark-test.scala.sh

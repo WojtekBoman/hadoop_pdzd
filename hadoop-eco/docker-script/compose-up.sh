@@ -51,7 +51,7 @@ EOF
 
 for slave in $(seq 1 $slaves)
 do
-  ip_addr+='      - "'slave$slave':10.0.2.'$(($slave + 3))'"
+  ip_addr+='      - "'slave$slave':10.0.3.'$(($slave + 3))'"
 '
 done
 
@@ -72,11 +72,11 @@ do
       - ../../hadoop/conf/hdfs-site.xml:/usr/local/hadoop-3.3.0/etc/hadoop/hdfs-site.xml
     networks:
       hadoop-cluster:
-        ipv4_address: 10.0.2.'$(($slave + 3))'
+        ipv4_address: 10.0.3.'$(($slave + 3))'
     extra_hosts:
-      - "mariadb:10.0.2.2"
-      - "master:10.0.2.3"
-      - "ftpslave:10.0.2.7"
+      - "mariadb:10.0.3.2"
+      - "master:10.0.3.3"
+      - "ftpslave:10.0.3.7"
 '$ip_addr
   if [[ ! $slave -eq $slaves ]]
   then
@@ -103,11 +103,11 @@ services:
       - ./files:/home/vsftpd
     networks:
       hadoop-cluster:
-       ipv4_address: 10.0.2.7
+       ipv4_address: 10.0.3.7
     extra_hosts:
-      - "mariadb:10.0.2.2"
-      - "master:10.0.2.3"
-      - "ftpslave:10.0.2.7"
+      - "mariadb:10.0.3.2"
+      - "master:10.0.3.3"
+      - "ftpslave:10.0.3.7"
   mariadb:
     image: hjben/mariadb:10.5
     hostname: mariadb
@@ -117,16 +117,16 @@ services:
       - 3306:3306
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup
-      - $maria_data_path:/var/lib/mysql
+#      - $maria_data_path:/var/lib/mysql
     environment:
       MARIADB_ROOT_PASSWORD: $maria_root_password
     networks:
       hadoop-cluster:
-        ipv4_address: 10.0.2.2
+        ipv4_address: 10.0.3.2
     extra_hosts:
-      - "mariadb:10.0.2.2"
-      - "master:10.0.2.3"
-      - "ftpslave:10.0.2.7"
+      - "mariadb:10.0.3.2"
+      - "master:10.0.3.3"
+      - "ftpslave:10.0.3.7"
 $ip_addr
   master:
     image: hjben/hadoop-eco:$hadoop_version
@@ -140,6 +140,7 @@ $ip_addr
       - 10000:10000
       - 10002:10002
       - 16010:16010
+      - 50070:50070
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup
       - $hdfs_path:/data/hadoop
@@ -152,11 +153,11 @@ $ip_addr
       - ../../hadoop/conf/hdfs-site.xml:/usr/local/hadoop-3.3.0/etc/hadoop/hdfs-site.xml
     networks:
       hadoop-cluster:
-        ipv4_address: 10.0.2.3
+        ipv4_address: 10.0.3.3
     extra_hosts:
-      - "mariadb:10.0.2.2"
-      - "master:10.0.2.3"
-      - "ftpslave:10.0.2.7"
+      - "mariadb:10.0.3.2"
+      - "master:10.0.3.3"
+      - "ftpslave:10.0.3.7"
 $ip_addr
 $slave_service
 networks:
@@ -164,7 +165,7 @@ networks:
   ipam:
    driver: default
    config:
-   - subnet: 10.0.2.0/24
+   - subnet: 10.0.3.0/24
 EOF
 echo "Done."
 

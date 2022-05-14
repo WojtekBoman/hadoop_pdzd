@@ -9,7 +9,7 @@ RUN if [ ! -e /usr/bin/python ]; then ln -s /usr/bin/python2.7 /usr/bin/python; 
 
 RUN wget https://archive.apache.org/dist/hadoop/core/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz
 RUN tar -xzf hadoop-$HADOOP_VERSION.tar.gz -C /usr/local && \
-    rm -f hadoop-$HADOOP_VERSION.tar.gz
+    rm -f hadoop-$HADOOP_VERSION.tar.gz \
 RUN ln -s /usr/local/hadoop-$HADOOP_VERSION $HADOOP_HOME
 
 RUN mkdir -p $HADOOP_HOME/logs
@@ -18,11 +18,11 @@ RUN mkdir -p /sh
 
 RUN for user in hadoop hdfs yarn mapred; do \
          useradd -U -M -d $HADOOP_HOME --shell /bin/bash ${user}; \
-    done
+    done \
 
 RUN for user in root hdfs yarn mapred; do \
          usermod -G hadoop ${user}; \
-    done
+    done \
 
 RUN echo "export JAVA_HOME=$JAVA_HOME" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \
     echo "export HDFS_DATANODE_USER=root" >> $HADOOP_HOME/etc/hadoop/hadoop-env.sh && \

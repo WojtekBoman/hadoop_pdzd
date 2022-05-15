@@ -22,6 +22,7 @@ RUN dnf -y --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-
     echo "spark.history.provider org.apache.spark.deploy.history.FsHistoryProvider" >> $SPARK_HOME/conf/spark-defaults.conf && \
     echo "spark.history.fs.logDirectory hdfs://master:9000/spark-logs" >> $SPARK_HOME/conf/spark-defaults.conf && \
     echo "spark.history.fs.update.interval 10s" >> $SPARK_HOME/conf/spark-defaults.conf && \
-    echo "spark.history.ui.port 18080" >> $SPARK_HOME/conf/spark-defaults.conf
+    echo "spark.history.ui.port 18080" >> $SPARK_HOME/conf/spark-defaults.conf && \
+    pip3 install pandas
 
 # hdfs dfs -mkdir /spark-logs is executed during hive init

@@ -39,7 +39,7 @@ e7-init:
 
 e7-test:
 	docker exec -it master /pdzd/test/0-init-test.sh
-	
+
 e7-mapreduce:
 	docker exec -it master /pdzd/test/0-mapreduce.sh
 

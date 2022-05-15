@@ -6,7 +6,7 @@ ENV LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH
 ENV PATH=$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 
 RUN dnf -y --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos && \
-    dnf distro-sync -y && \
+#    dnf distro-sync -y && \
     dnf install -y epel-release && \
     dnf install -y nano python3 supervisor && \
     dnf clean all && \

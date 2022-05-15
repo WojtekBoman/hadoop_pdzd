@@ -110,17 +110,24 @@ services:
       - "master:10.0.3.3"
       - "ftpslave:10.0.3.7"
   mariadb:
-    image: hjben/mariadb:10.5
+    image: mysql:5.7.38
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mariadb
+#    image: hjben/mariadb:10.5
     hostname: mariadb
     container_name: mariadb
     privileged: true
     ports:
       - 3306:3306
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup
+      - ../../mariadb/conf/init-hive.sql:/docker-entrypoint-initdb.d/init-hive.sql
+#      - /sys/fs/cgroup:/sys/fs/cgroup
+#      - ../../mariadb/conf/server.cnf:/etc/my.cnf.d/server.cnf
 #      - $maria_data_path:/var/lib/mysql
-    environment:
-      MARIADB_ROOT_PASSWORD: $maria_root_password
+#    environment:
+#      MARIADB_ROOT_PASSWORD: $maria_root_password
     networks:
       hadoop-cluster:
         ipv4_address: 10.0.3.2

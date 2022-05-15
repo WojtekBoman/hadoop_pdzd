@@ -53,7 +53,7 @@ uploadCarsFilesToHdfs(){
     done 
 }
 
-uploadingGeoFilesToHdfs(){
+uploadGeoFilesToHdfs(){
    echo "Creating geo directory"
    $(hdfs dfs -mkdir -p /geo/)
    echo "Uploading geo files"
@@ -64,7 +64,7 @@ uploadingGeoFilesToHdfs(){
 
  
 if validateCsvFiles $CARS_DIR && validateCsvFiles $GEO_DIR; then
-   if validateCarsFiles && validateFreeSpace; then
+   if validateFreeSpace; then
 	uploadCarsFilesToHdfs
         uploadGeoFilesToHdfs
    fi

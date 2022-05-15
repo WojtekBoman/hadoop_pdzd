@@ -1,4 +1,7 @@
-.PHONY: up down hadoop-start hadoop-stop hive-init hive-start hive-stop e7-init e7-test e7-mapreduce spark-shell spark-start e7-spark
+.PHONY: clean up down hadoop-start hadoop-stop hive-init hive-start hive-stop e7-init e7-test e7-mapreduce spark-shell spark-start e7-spark
+
+clean:
+	docker image rm pdzd/hadoop-eco:latest
 
 up:
 	./compose-up.sh 3.3.0 3 /tmp/hadoop /tmp/hadoop_logs /tmp/hbase_logs /tmp/hive_logs /tmp/sqoop_logs mariadb /tmp/maria

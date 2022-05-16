@@ -27,7 +27,7 @@ checkEmptyDirectoriesExist() {
 
 downloadTestFile() {
   echo "Downloading test_cars.csv from ftp."
-  curl -u ftp:ftp 'ftp://ftpslave/cars/test_cars.csv' -o /tmp/${TEST_FILE}
+  curl -u ftp:ftp 'ftp://ftpslave/cars/2022_05.csv' -o /tmp/${TEST_FILE}
 }
 
 putToHDFS() {

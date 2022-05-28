@@ -48,3 +48,6 @@ e7-spark:
 
 e7-hive:
 	docker exec -it master /pdzd/test/0-hive-test.sh
+
+e9-tmp4:
+	docker exec -it master spark-shell -i /pdzd/test/0-tmp4-spark.scala

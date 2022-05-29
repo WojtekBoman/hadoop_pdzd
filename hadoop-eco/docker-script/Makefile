@@ -32,7 +32,7 @@ spark-shell:
 	docker exec -it master spark-shell
 
 ftp-download:
-	docker exec -it master /pdzd/main/download_files.sh
+	docker exec -it master /pdzd/main/1-download_files.sh
 
 e7-init:
 	docker exec -it master /pdzd/main/0-init.sh

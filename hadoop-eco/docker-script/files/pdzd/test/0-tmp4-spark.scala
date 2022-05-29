@@ -3,8 +3,8 @@ import org.apache.spark.sql.catalyst.plans._
 import org.apache.hadoop.fs._
 import org.apache.spark.sql.functions.upper
 
-val cars = spark.read.option("header",true).csv("hdfs://master:9000/cars/test_cars.csv")
-val geo = spark.read.option("header",true).csv("hdfs://master:9000/geo/geo.csv")
+val cars = spark.read.option("header",true).csv("hdfs://master:9000/tmps/cars_src.csv")
+val geo = spark.read.option("header",true).csv("hdfs://master:9000//tmps/geo_src.csv")
 .withColumnRenamed("name", "vf_PlantCountry")
 .withColumn("vf_PlantCountry",upper(col("vf_PlantCountry")))
 .withColumn("vf_PlantCountry", regexp_replace(col("vf_PlantCountry"), "UNITED STATES", "UNITED STATES (USA)"))

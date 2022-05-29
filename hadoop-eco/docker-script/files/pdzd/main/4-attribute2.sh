@@ -13,12 +13,12 @@ compileAttribute2() {
   source ~/.bashrc
 
   mkdir -p /tmp/attribute2_classes
-  javac -classpath $HADOOP_CLASSPATH -d /tmp/attribute2_classes /pdzd/Attribute2.java
+  javac -classpath $HADOOP_CLASSPATH -d /tmp/attribute2_classes /pdzd/main/4-attribute2/Attribute2.java
   jar -cvf Attribute2.jar -C /tmp/attribute2_classes .
 }
 
 runAttribute2() {
-  yarn jar Attribute2.jar Attribute2 /tmps/tmp2_tmp/*.csv /tmps/tmp2_done
+  yarn jar Attribute2.jar Attribute2 /tmps/tmp2_src.csv /tmps/tmp2_done
 }
 
 verifyResults() {
@@ -31,7 +31,13 @@ verifyResults() {
   fi
 }
 
+runSpark() {
+  echo "Producing output file with Spark"
+  spark-shell < /pdzd/main/4-attribute2/attribute2b.scala
+}
+
 removeOldFiles
 compileAttribute2
 runAttribute2
 verifyResults
+runSpark

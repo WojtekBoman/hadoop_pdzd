@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 TEST_DIR=test_data
-CARS_FILE=cars.csv
-EXPECTED_FILE=expected_result_1.csv
+SRC_FILE=cars_src.csv
+EXPECTED_FILE=expected_result.csv
 
 cleanTestDirectory() {
   echo "Removing test directory."
@@ -12,7 +12,7 @@ cleanTestDirectory() {
 putToHDFS() {
   echo "Putting test files to HDFS."
   hdfs dfs -mkdir /${TEST_DIR}
-  hdfs dfs -put /pdzd/test/${TEST_DIR}/${CARS_FILE} /${TEST_DIR}
+  hdfs dfs -put /pdzd/test/${TEST_DIR}/${SRC_FILE} /${TEST_DIR}
   hdfs dfs -put /pdzd/test/${TEST_DIR}/${EXPECTED_FILE} /${TEST_DIR}
 }
 

@@ -55,3 +55,5 @@ e9-tmp4:
 	docker exec -it master /pdzd/test/spark-3a-test.sh
 3b-test:
 	docker exec -it master /pdzd/test/spark-3b-test.sh
+attr-3:
+	docker exec -it master /pdzd/test/spark-3.sh

@@ -2,8 +2,13 @@ FROM hjben/hadoop-eco:3.3.0
 
 ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 ENV SPARK_HOME=$HADOOP_HOME/spark
+ENV SQOOP_HOME /usr/local/sqoop
 ENV LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH
 ENV PATH=$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
+ENV SQOOP_VERSION 1.4.7
+ENV SQOOP_HADOOP_VERSION 2.6.0
+ENV MYSQL_CONNECTOR_VERSION 5.1.49
+ENV PATH $PATH:$SQOOP_HOME/bin
 
 RUN dnf -y --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-stream-repos && \
 #    dnf distro-sync -y && \
@@ -23,6 +28,15 @@ RUN dnf -y --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-
     echo "spark.history.fs.logDirectory hdfs://master:9000/spark-logs" >> $SPARK_HOME/conf/spark-defaults.conf && \
     echo "spark.history.fs.update.interval 10s" >> $SPARK_HOME/conf/spark-defaults.conf && \
     echo "spark.history.ui.port 18080" >> $SPARK_HOME/conf/spark-defaults.conf && \
-    pip3 install pandas
+    pip3 install pandas && \
+    wget http://archive.apache.org/dist/sqoop/$SQOOP_VERSION/sqoop-$SQOOP_VERSION.bin__hadoop-$SQOOP_HADOOP_VERSION.tar.gz && \
+    tar -xzf sqoop-$SQOOP_VERSION.bin__hadoop-$SQOOP_HADOOP_VERSION.tar.gz -C /usr/local && \
+    rm -f sqoop-$SQOOP_VERSION.bin__hadoop-$SQOOP_HADOOP_VERSION.tar.gz && \
+    ln -s /usr/local/sqoop-$SQOOP_VERSION.bin__hadoop-$SQOOP_HADOOP_VERSION $SQOOP_HOME && \
+#    wget https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-java-$MYSQL_CONNECTOR_VERSION.tar.gz && \
+#    mv mysql-connector-java-$MYSQL_CONNECTOR_VERSION.jar $SQOOP_HOME/lib/ && \
+    rm -f $SQOOP_HOME/lib/guava-*.jar && cp $HADOOP_HOME/share/hadoop/hdfs/lib/guava-*.jar $SQOOP_HOME/lib/
+
+ADD lib/*.jar $SQOOP_HOME/lib/
 
 # hdfs dfs -mkdir /spark-logs is executed during hive init

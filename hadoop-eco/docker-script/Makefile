@@ -55,6 +55,8 @@ e9-tmp1-test:
 	docker exec -it master /pdzd/test/4-attribute1-test.sh
 e9-tmp4:
 	docker exec -it master spark-shell -i /pdzd/main/4-attribute4.scala
+e9-tmp4-test:
+	docker exec -it master /pdzd/test/4-attribute4-test.sh
 3a-test:
 	docker exec -it master /pdzd/test/spark-3a-test.sh
 3b-test:

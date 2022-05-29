@@ -51,6 +51,8 @@ e7-hive:
 
 e9-tmp1:
 	docker exec -it master spark-shell -i /pdzd/main/4-attribute1.scala
+e9-tmp1-test:
+	docker exec -it master /pdzd/test/4-attribute1-test.sh
 e9-tmp4:
 	docker exec -it master spark-shell -i /pdzd/main/4-attribute4.scala
 3a-test:

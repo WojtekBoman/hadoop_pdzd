@@ -2,7 +2,7 @@ import org.apache.spark.sql.functions.col
 import org.apache.hadoop.fs._
 
 val cars = spark.read.option("header",true).csv("hdfs://master:9000/tmps/cars_src.csv").select("msrp","askPrice")
-val carsWithPriceDiff = cars.withColumn("priceDiffPerc",col("msrp")-col("askPrice"))
+val carsWithPriceDiff = cars.withColumn("priceDiffPerc",(col("msrp")-col("askPrice")/col("msrp")))
 carsWithPriceDiff.write.format("csv").save("hdfs://master:9000/tmps/tmp1")
 
 val fs = FileSystem.get(sc.hadoopConfiguration)

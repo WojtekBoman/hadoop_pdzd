@@ -5,7 +5,7 @@ rm -f /tmp/pdzd/cars/*
 rm -f /tmp/pdzd/geo/*
 
 CAR_FILE=$(curl --list-only ftp://ftp:ftp@ftpslave/cars/ | sort | tail -n 1)
-wget --no-passive -P /tmp/pdzd/cars ftp://ftp:ftp@ftpslave/cars/${CAR_FILE} 2>&1 | tee -a /tmp/pdzd/logs/cars.l$
+wget --no-passive -P /tmp/pdzd/cars ftp://ftp:ftp@ftpslave/cars/${CAR_FILE} 2>&1 | tee -a /tmp/pdzd/logs/cars.log
 wget --no-passive -P /tmp/pdzd/geo ftp://ftp:ftp@ftpslave/geo/geo.csv 2>&1 | tee -a /tmp/pdzd/logs/geo.log
 
 # validation

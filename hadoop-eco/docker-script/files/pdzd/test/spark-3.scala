@@ -18,7 +18,7 @@ def operation_3b(df: DataFrame): DataFrame = {
         .select(col("firstSeen"),col("lastSeen"),col("modelName"),col("vf_modelYear"),col("modelYearDemandClass"))
 }
 
-val df = spark.read.option("header",true).csv("hdfs://master:9000/cars/test_cars.csv")
+val df = spark.read.option("header",true).csv("hdfs://master:9000/cars/cars.csv")
 
 val df_1 = operation_3a(df)
 val df_2 = operation_3b(df_1)

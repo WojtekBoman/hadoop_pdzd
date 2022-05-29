@@ -58,7 +58,7 @@ uploadCarsFilesToHdfs(){
     $(hdfs dfs -mkdir -p /cars/)
     echo "Uploading cars files"
     for file in $CARS_DIR/*;do
-        $(hdfs dfs -put -f $file /cars/)
+        $(hdfs dfs -put -f $file /cars/cars.csv)
     done
 }
 
@@ -67,7 +67,7 @@ uploadGeoFilesToHdfs(){
    $(hdfs dfs -mkdir -p /geo/)
    echo "Uploading geo files"
    for file in $GEO_DIR/*;do
-       $(hdfs dfs -put -f $file /geo/)
+       $(hdfs dfs -put -f $file /geo/geo.csv)
    done
 }
 

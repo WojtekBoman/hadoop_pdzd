@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "docker" do |docker|
      docker.vm.network "forwarded_port", guest: 20, host: 20
      docker.vm.network "forwarded_port", guest: 21, host: 21
+     docker.vm.network "forwarded_port", guest: 3306, host: 3306
      docker.vm.network "forwarded_port", guest: 4040, host: 4040
      docker.vm.network "forwarded_port", guest: 8088, host: 8088
      docker.vm.network "forwarded_port", guest: 9000, host: 9000

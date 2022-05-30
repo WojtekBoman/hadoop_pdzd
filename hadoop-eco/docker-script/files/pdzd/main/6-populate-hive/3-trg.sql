@@ -30,6 +30,10 @@ CREATE TABLE trg.trg
 ) ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
     TBLPROPERTIES ("skip.header.line.count" = "1");
 
---
--- INSERT INTO TABLE trg.trg
--- SELECT * FROM cars;
+
+INSERT INTO TABLE trg.trg
+SELECT c.*, cr.*, mg.*, mydc.*, pd.* FROM 
+cars c LEFT JOIN price_diffs pd ON pd.msrp=c.msrp AND pd.askPrice=c.askPrice
+LEFT JOIN mileage_groups mg ON mg.lastSeen=c.lastSeen AND mg.mileage=c.mileage AND mg.brandName=c.brandName
+LEFT JOIN model_year_demand_classes mydc ON mydc.firstSeen=c.firstSeen AND mydc.lastSeen=c.lastSeen AND mydc.modelName=c.modelName AND mydc.vf_ModelYear=c.vf_ModelYear
+LEFT JOIN country_regions cr ON cr.vf_PlantCountry=c.vf_PlantCountry LIMIT 10;

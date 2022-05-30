@@ -22,3 +22,5 @@ beeline -u jdbc:hive2://master:10000 hive org.apache.hive.jdbc.HiveDriver -f /pd
 echo "Importing attribute 4"
 hdfs dfs -cp /tmps/tmp4.csv /tmps/hive_tmp4.csv
 beeline -u jdbc:hive2://master:10000 hive org.apache.hive.jdbc.HiveDriver -f /pdzd/main/6-populate-hive/2-attribute4.sql
+
+beeline -u jdbc:hive2://master:10000 hive org.apache.hive.jdbc.HiveDriver -f /pdzd/main/6-populate-hive/3-trg.sql

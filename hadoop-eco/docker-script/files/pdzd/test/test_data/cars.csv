@@ -1,4 +1,5 @@
 vin,stockNum,firstSeen,lastSeen,msrp,askPrice,mileage,isNew,brandName,modelName,vf_BasePrice,vf_BodyClass,vf_FuelTypePrimary,vf_ModelYear,vf_PlantCountry,vf_EngineModel
+b41e8c36983f4435949cb363a62b23babb37047f1759a10865c06e37bebd22fa,Big Horn,2018-03-21,2018-06-01,100,90,11,True,RAMS,1500,,Pickup,Gasoline,2018,UNITED STATES (USA),
 b41e8c36983f4435949cb363a62b23babb37047f1759a10865c06e37bebd22fa,Big Horn,2018-03-21,2018-06-01,100,90,11,True,RAM,1500,,Pickup,Gasoline,2018,UNITED STATES (USA),
 5e22c78014d4ceb60ef5d7488988b15421be7df12e54b44d0cd47f4231539afc,Lariat,2018-04-15,2018-06-01,39962,39962,13310,False,FORD,F-150,33650,Pickup,Gasoline,2017,UNITED STATES (USA),5.0L-4V
 322d48b4c60b477e2f9ed6b702a04e79de7a7fa28965213e5a2f362df3a6b184,Rubicon,2017-10-08,2018-06-01,39962,39962,9642,False,JEEP,Wrangler,37445,Sport Utility Vehicle (SUV)/Multi-Purpose Vehicle (MPV),Gasoline,2017,UNITED STATES (USA),

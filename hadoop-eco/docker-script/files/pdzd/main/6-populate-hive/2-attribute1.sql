@@ -4,7 +4,7 @@ CREATE TABLE trg.price_diffs
 (
     msrp          int,
     askPrice      int,
-    priceDiffPerc int
+    priceDiffPerc double
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
     TBLPROPERTIES ("skip.header.line.count" = "1");

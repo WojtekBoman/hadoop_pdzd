@@ -76,3 +76,6 @@ e9-tmp4-test:
 	docker exec -it master /pdzd/test/spark-3a-test.sh
 3b-test:
 	docker exec -it master /pdzd/test/spark-3b-test.sh
+
+e9-hive:
+	docker exec -it master /pdzd/main/6-populate-hive.sh

@@ -1,4 +1,5 @@
 import org.apache.hadoop.fs._
+import org.apache.spark.sql.SaveMode
 
 // args(0) = /tmps/cars_src.csv
 // args(1) = /tmps/tmp2_done/part-r-00000
@@ -15,7 +16,18 @@ out.write.option("header",true).option("emptyValue",null).csv("hdfs://master:900
 val fs = FileSystem.get(sc.hadoopConfiguration)
 val file = fs.globStatus(new Path("hdfs://master:9000/tmps/tmp2_out/part*"))(0).getPath().getName()
 fs.rename(new Path("hdfs://master:9000/tmps/tmp2_out/" + file), new Path("hdfs://master:9000" + args(2)))
+
+out.write
+  .format("jdbc")
+  .option("url","jdbc:mysql://mariadb:3306/trg?useSSL=false&characterEncoding=UTF-8")
+  .option("dbtable","mileage_groups")
+  .option("user","root")
+  .option("password","mariadb")
+  .mode(SaveMode.Overwrite)
+  .save()
+
 fs.delete(new Path("hdfs://master:9000/tmps/tmp2_tmp"), true)
 fs.delete(new Path("hdfs://master:9000/tmps/tmp2_done"), true)
 fs.delete(new Path("hdfs://master:9000/tmps/tmp2_out"), true)
+
 //fs.delete(new Path("hdfs://master:9000/tmps/tmp2_src.csv"), true)

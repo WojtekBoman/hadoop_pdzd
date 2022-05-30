@@ -33,9 +33,13 @@ RUN dnf -y --disablerepo '*' --enablerepo=extras swap centos-linux-repos centos-
     tar -xzf sqoop-$SQOOP_VERSION.bin__hadoop-$SQOOP_HADOOP_VERSION.tar.gz -C /usr/local && \
     rm -f sqoop-$SQOOP_VERSION.bin__hadoop-$SQOOP_HADOOP_VERSION.tar.gz && \
     ln -s /usr/local/sqoop-$SQOOP_VERSION.bin__hadoop-$SQOOP_HADOOP_VERSION $SQOOP_HOME && \
-#    wget https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-java-$MYSQL_CONNECTOR_VERSION.tar.gz && \
-#    mv mysql-connector-java-$MYSQL_CONNECTOR_VERSION.jar $SQOOP_HOME/lib/ && \
-    rm -f $SQOOP_HOME/lib/guava-*.jar && cp $HADOOP_HOME/share/hadoop/hdfs/lib/guava-*.jar $SQOOP_HOME/lib/
+    wget https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-java-$MYSQL_CONNECTOR_VERSION.tar.gz -O /tmp/mysql-connector.tar.gz && \
+    tar -xzf /tmp/mysql-connector.tar.gz --directory /tmp && \
+    cp /tmp/mysql-connector-java-$MYSQL_CONNECTOR_VERSION/mysql-connector-java-$MYSQL_CONNECTOR_VERSION-bin.jar $SPARK_HOME/jars && \
+    cp /tmp/mysql-connector-java-$MYSQL_CONNECTOR_VERSION/mysql-connector-java-$MYSQL_CONNECTOR_VERSION-bin.jar $SQOOP_HOME/lib && \
+    rm -f $SQOOP_HOME/lib/guava-*.jar && \
+    cp $HADOOP_HOME/share/hadoop/hdfs/lib/guava-*.jar $SQOOP_HOME/lib/ && \
+    rm -Rf /tmp/mysql-connector*
 
 ADD lib/*.jar $SQOOP_HOME/lib/
 

@@ -32,8 +32,20 @@ DROP TABLE IF EXISTS trg.trg;
 
 -- INSERT INTO TABLE trg.trg
 CREATE TABLE trg.trg AS
-SELECT c.*, cr.region, cr.`sub-region`, mg.mileagegroup, mydc.modelyeardemandclass, pd.pricediffperc
-FROM trg.cars c LEFT JOIN trg.price_diffs pd ON pd.msrp=c.msrp AND pd.askPrice=c.askPrice
-LEFT JOIN trg.mileage_groups mg ON mg.lastSeen=c.lastSeen AND mg.mileage=c.mileage AND mg.brandName=c.brandName
-LEFT JOIN trg.model_year_demand_classes mydc ON mydc.firstSeen=c.firstSeen AND mydc.lastSeen=c.lastSeen AND mydc.modelName=c.modelName AND mydc.vf_ModelYear=c.vf_ModelYear
-LEFT JOIN trg.country_regions cr ON cr.vf_PlantCountry=c.vf_PlantCountry LIMIT 10;
+SELECT c.*,
+       cr.region,
+       cr.`sub-region`,
+       mg.mileagegroup,
+       mydc.modelyeardemandclass,
+       pd.pricediffperc
+FROM trg.cars c
+         LEFT JOIN trg.price_diffs pd
+                   ON pd.msrp = c.msrp AND pd.askPrice = c.askPrice
+         LEFT JOIN trg.mileage_groups mg
+                   ON mg.lastSeen = c.lastSeen AND mg.mileage = c.mileage AND mg.brandName = c.brandName
+         LEFT JOIN trg.model_year_demand_classes mydc
+                   ON mydc.firstSeen = c.firstSeen AND mydc.lastSeen = c.lastSeen AND mydc.modelName = c.modelName AND
+                      mydc.vf_ModelYear = c.vf_ModelYear
+         LEFT JOIN trg.country_regions cr ON cr.vf_PlantCountry = c.vf_PlantCountry
+-- LIMIT 10
+;

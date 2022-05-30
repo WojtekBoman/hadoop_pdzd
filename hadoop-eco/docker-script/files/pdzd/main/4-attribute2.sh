@@ -18,7 +18,7 @@ compileAttribute2() {
 }
 
 runAttribute2() {
-  yarn jar Attribute2.jar Attribute2 /tmps/tmp2_src.csv /tmps/tmp2_done
+  yarn jar Attribute2.jar Attribute2 /tmps/tmp2_src.csv ${OUT_PATH} -- | tee -a /tmp/pdzd/logs/attribute2.log
 }
 
 verifyResults() {
@@ -33,7 +33,7 @@ verifyResults() {
 
 runSpark() {
   echo "Producing output file with Spark"
-  spark-shell < /pdzd/main/4-attribute2/attribute2b.scala
+  spark-shell --conf spark.driver.args="/tmps/cars_src.csv ${OUT_PATH}/part-r-00000 /tmps/tmp2.csv" < /pdzd/main/4-attribute2/attribute2b.scala -- | tee -a /tmp/pdzd/logs/attribute2.log
 }
 
 removeOldFiles

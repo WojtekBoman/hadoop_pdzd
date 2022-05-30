@@ -49,17 +49,30 @@ e7-spark:
 e7-hive:
 	docker exec -it master /pdzd/test/0-hive-test.sh
 
+e9-filtering:
+	sh /pdzd/main/2-filtering.sh
+
 e9-tmp1:
 	docker exec -it master spark-shell -i /pdzd/main/4-attribute1.scala
+
 e9-tmp1-test:
 	docker exec -it master /pdzd/test/4-attribute1-test.sh
+
+e9-tmp2:
+	sh /pdzd/main/4-attribute2.sh
+
+e9-tmp3:
+	docker exec -it master /pdzd/test/spark-3.sh
+
 e9-tmp4:
 	docker exec -it master spark-shell -i /pdzd/main/4-attribute4.scala
+
+e9-tmp2-test:
+	docker exec -it master /pdzd/test/4-attribute2-test.sh
+
 e9-tmp4-test:
 	docker exec -it master /pdzd/test/4-attribute4-test.sh
 3a-test:
 	docker exec -it master /pdzd/test/spark-3a-test.sh
 3b-test:
 	docker exec -it master /pdzd/test/spark-3b-test.sh
-e9-tmp3:
-	docker exec -it master /pdzd/test/spark-3.sh

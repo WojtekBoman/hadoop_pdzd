@@ -1,15 +1,12 @@
-DROP TABLE IF EXISTS trg.mileage_groups;
+DROP TABLE IF EXISTS trg.country_regions;
 
-CREATE TABLE trg.mileage_groups
+CREATE TABLE trg.country_regions
 (
-    brandName    STRING,
-    lastSeen     DATE,
-    mileage      int,
-    mileageGroup smallint,
-    constraint mileage_groups_pk
-        primary key (brandName, lastseen, mileage) disable novalidate
+    vf_PlantCountry STRING,
+    region          STRING,
+    `sub-region`    STRING
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
     TBLPROPERTIES ("skip.header.line.count" = "1");
 
-LOAD DATA INPATH '/tmps/hive_tmp4.csv' INTO TABLE trg.mileage_groups;
+LOAD DATA INPATH '/tmps/hive_tmp4.csv' INTO TABLE trg.country_regions;

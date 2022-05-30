@@ -3,7 +3,7 @@ import org.apache.hadoop.fs._
 
 val cars = spark.read.option("header",true).csv("hdfs://master:9000/tmps/cars_src.csv").select("msrp","askPrice")
 val carsWithPriceDiff = cars.withColumn("priceDiffPerc",(col("msrp")-col("askPrice")/col("msrp")))
-carsWithPriceDiff.write.option("header",true).csv("hdfs://master:9000/test_data/cars_test")
+carsWithPriceDiff.write.option("header",true).csv("hdfs://master:9000/tmps/tmp1")
 
 val fs = FileSystem.get(sc.hadoopConfiguration)
 val file = fs.globStatus(new Path("hdfs://master:9000/tmps/tmp1/part*"))(0).getPath().getName()

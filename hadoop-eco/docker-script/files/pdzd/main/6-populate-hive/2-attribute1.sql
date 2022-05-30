@@ -1,17 +1,14 @@
-DROP TABLE IF EXISTS trg.mileage_groups;
+DROP TABLE IF EXISTS trg.price_diffs;
 
-CREATE TABLE trg.mileage_groups
+CREATE TABLE trg.price_diffs
 (
-    brandName    STRING,
-    lastSeen     DATE,
-    mileage      int,
-    mileageGroup smallint,
-    constraint mileage_groups_pk
-        primary key (brandName, lastseen, mileage) disable novalidate
+    msrp          int,
+    askPrice      int,
+    priceDiffPerc int
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
     TBLPROPERTIES ("skip.header.line.count" = "1");
 
-LOAD DATA INPATH '/tmps/hive_tmp1.csv' INTO TABLE trg.mileage_groups;
+LOAD DATA INPATH '/tmps/hive_tmp1.csv' INTO TABLE trg.price_diffs;
 
--- SELECT count(*) FROM trg.mileage_groups;
+-- SELECT count(*) FROM trg.price_diffs;

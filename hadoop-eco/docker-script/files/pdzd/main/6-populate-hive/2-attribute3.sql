@@ -1,15 +1,14 @@
-DROP TABLE IF EXISTS trg.mileage_groups;
+DROP TABLE IF EXISTS trg.model_year_demand_classes;
 
-CREATE TABLE trg.mileage_groups
+CREATE TABLE trg.model_year_demand_classes
 (
-    brandName    STRING,
-    lastSeen     DATE,
-    mileage      int,
-    mileageGroup smallint,
-    constraint mileage_groups_pk
-        primary key (brandName, lastseen, mileage) disable novalidate
+    firstSeen            DATE,
+    lastSeen             DATE,
+    modelName            STRING,
+    vf_modelYear         int,
+    modelYearDemandClass STRING
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
     TBLPROPERTIES ("skip.header.line.count" = "1");
 
-LOAD DATA INPATH '/tmps/hive_tmp3.csv' INTO TABLE trg.mileage_groups;
+LOAD DATA INPATH '/tmps/hive_tmp3.csv' INTO TABLE trg.model_year_demand_classes;

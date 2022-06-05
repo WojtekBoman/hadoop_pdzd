@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 TEST_DIR=test_data
-CARS_FILE=cars.csv
+CARS_FILE=cars_10.csv
 GEO_FILE=geo.csv
 EXPECTED_FILE=expected_result_4.csv
 

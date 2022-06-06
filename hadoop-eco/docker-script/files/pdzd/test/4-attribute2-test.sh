@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 TEST_DIR=test_data
-CARS_FILE=cars.csv
+CARS_FILE=cars_10.csv
+TMP2_FILE=cars_10_2.csv
 EXPECTED_FILE=expected_result_2.csv
 OUT_PATH=/tmps/test2_done
 CLASSES_PATH=/tmp/attribute2_classes
@@ -20,6 +21,7 @@ putToHDFS() {
   echo "Putting test files to HDFS."
   hdfs dfs -mkdir -p /pdzd/test/${TEST_DIR}
   hdfs dfs -put -f /pdzd/test/${TEST_DIR}/${CARS_FILE} /pdzd/test/${TEST_DIR}/${CARS_FILE}
+  hdfs dfs -put -f /pdzd/test/${TEST_DIR}/${TMP2_FILE} /pdzd/test/${TEST_DIR}/${TMP2_FILE}
   hdfs dfs -put -f /pdzd/test/${TEST_DIR}/${EXPECTED_FILE} /pdzd/test/${TEST_DIR}/${EXPECTED_FILE}
 }
 
@@ -33,7 +35,7 @@ compileMapReduce() {
 }
 
 runMapReduce() {
-  yarn jar Attribute2.jar Attribute2 /tmps/tmp2_src.csv ${OUT_PATH}
+  yarn jar Attribute2.jar Attribute2 /pdzd/test/${TEST_DIR}/${TMP2_FILE} ${OUT_PATH}
 }
 
 verifyMapReduce() {

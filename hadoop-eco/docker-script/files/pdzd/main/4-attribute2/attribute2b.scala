@@ -5,7 +5,7 @@ import org.apache.spark.sql.SaveMode
 // args(1) = /tmps/tmp2_done/part-r-00000
 // args(2) = /tmps/tmp2.csv
 val args = sc.getConf.get("spark.driver.args").split("\\s+")
-
+//  val args = Array("/pdzd/test/test_data/cars_10.csv", "/tmps/test2_done/part-r-00000", "/pdzd/test/test_data/tmp2.csv")
 val df = spark.read.option("header",true).csv("hdfs://master:9000" + args(0)).withColumn("year", substring(col("lastSeen"), 0, 4))
 val mr = spark.read.option("header",false).csv("hdfs://master:9000" + args(1)).toDF("brand","year","maxMileage")
 val cars = df.select(col("mileage"),col("brandName"),col("lastSeen"), col("year"))

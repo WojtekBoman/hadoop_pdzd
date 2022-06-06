@@ -16,7 +16,7 @@ public class Attribute2 {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
         conf.set("mapred.textoutputformat.separator", ",");
-        Job job = Job.getInstance(conf, "word count");
+        Job job = Job.getInstance(conf, "Attribute2");
         job.setJarByClass(Attribute2.class);
         job.setMapperClass(TokenizerMapper.class);
         job.setCombinerClass(IntSumReducer.class);
@@ -37,7 +37,7 @@ public class Attribute2 {
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
             String[] split = value.toString().split(",");
-            word.set(String.join(",", split[1], split[2]));
+            word.set(String.join(",", split[1], split[3]));
             context.write(word, new IntWritable(toNum(split[0])));
         }
 

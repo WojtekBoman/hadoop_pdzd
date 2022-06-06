@@ -31,6 +31,8 @@ spark-start:
 spark-shell:
 	docker exec -it master spark-shell
 
+all: e7-init ftp-download e9-filtering e9-tmp1 e9-tmp2 e9-tmp3 e9-tmp4 e9-hive
+
 ftp-download:
 	docker exec -it master /pdzd/main/1-download_files.sh
 

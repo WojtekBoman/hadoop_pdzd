@@ -33,7 +33,7 @@ verifyResults() {
 
 runSpark() {
   echo "Producing output file with Spark"
-  spark-shell --conf spark.driver.args="/tmps/cars_src.csv ${OUT_PATH}/part-r-00000 /tmps/tmp2.csv" < /pdzd/main/4-attribute2/attribute2b.scala -- | tee -a /tmp/pdzd/logs/attribute2.log
+  spark-shell --conf spark.driver.args="/cars/tmp ${OUT_PATH}/part-r-00000 /tmps/tmp2.csv" < /pdzd/main/4-attribute2/attribute2b.scala -- | tee -a /tmp/pdzd/logs/attribute2.log
 }
 
 removeOldFiles

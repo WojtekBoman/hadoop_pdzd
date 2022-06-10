@@ -3,14 +3,16 @@
 CARS_DIR=cars
 GEO_DIR=geo
 TMPS_DIR=tmps
+TRG_DIR=trg
 
 checkDirectoriesExist() {
   echo "Looking for existing directories."
   CARS_C=$(hdfs dfs -ls / | grep cars | wc -l)
   GEO_C=$(hdfs dfs -ls / | grep geo | wc -l)
-  TMPS_C=$(hdfs dfs -ls / | grep geo | wc -l)
+  TMPS_C=$(hdfs dfs -ls / | grep tmps | wc -l)
+  TRG_C=$(hdfs dfs -ls / | grep trg | wc -l)
 
-  if [[ ($CARS_C == 1 || $GEO_C == 1 || $TMPS_C == 1) ]]; then
+  if [[ ($CARS_C == 1 || $GEO_C == 1 || $TMPS_C == 1 || $TRG_C == 1) ]]; then
     read -p "Would you like to re-create required directories? (y/N) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -22,6 +24,9 @@ checkDirectoriesExist() {
       fi
       if [[ $TMPS_C == 1 ]]; then
         cleanTmps
+      fi
+      if [[ $TRG_C == 1 ]]; then
+        cleanTrg
       fi
     else
       echo "Exiting."
@@ -49,6 +54,12 @@ createTmps() {
   hdfs dfs -mkdir -p /${TMPS_DIR}
 }
 
+
+createTrg() {
+  echo "Creating trg directory."
+  hdfs dfs -mkdir -p /${TRG_DIR}
+}
+
 cleanCars() {
   echo "Removing cars directory."
   hdfs dfs -rm -r /${CARS_DIR}
@@ -64,8 +75,14 @@ cleanTmps() {
   hdfs dfs -rm -r /${TMPS_DIR}
 }
 
+cleanTrg() {
+  echo "Removing trg directory."
+  hdfs dfs -rm -r /${TRG_DIR}
+}
+
 checkDirectoriesExist
 createCars
 createGeo
 createTmps
+createTrg
 #setFtpCrontab

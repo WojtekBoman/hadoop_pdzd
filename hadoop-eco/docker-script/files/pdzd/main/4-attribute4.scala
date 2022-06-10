@@ -5,7 +5,7 @@ import org.apache.spark.sql.functions.upper
 import org.apache.spark.sql.functions.row_number
 import org.apache.spark.sql.expressions.Window
 
-val cars = spark.read.option("header",true).csv("hdfs://master:9000/tmps/cars_src.csv")
+val cars = spark.read.option("header",true).csv("hdfs://master:9000/cars/tmp")
 val geo = spark.read.option("header",true).csv("hdfs://master:9000//tmps/geo_src.csv").withColumnRenamed("name","vf_PlantCountry").withColumn("vf_PlantCountry",upper(col("vf_PlantCountry"))).withColumn("vf_PlantCountry", regexp_replace(col("vf_PlantCountry"), "UNITED STATES", "UNITED STATES (USA)"))
 
 val w = Window.partitionBy($"vf_PlantCountry").orderBy($"vf_PlantCountry")

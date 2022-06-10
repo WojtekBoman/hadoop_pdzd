@@ -1,3 +1,4 @@
+SET mapred.input.dir.recursive=true;
 DROP TABLE IF EXISTS trg.cars;
 CREATE TABLE trg.cars
 (
@@ -23,6 +24,6 @@ CREATE TABLE trg.cars
     TBLPROPERTIES ("skip.header.line.count" = "1");
 
 LOAD
-    DATA INPATH '/tmps/hive_cars.csv' INTO TABLE trg.cars;
+    DATA INPATH '/cars/tmp/*.csv' INTO TABLE trg.cars;
 
 -- SELECT count(*) FROM trg.cars;

@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS trg.trg;
+DROP TABLE IF EXISTS trg.tmp;
 
 -- CREATE TABLE trg.trg AS SELECT * FROM cars where dob_year=1990
 --
@@ -31,7 +32,7 @@ DROP TABLE IF EXISTS trg.trg;
 --     TBLPROPERTIES ("skip.header.line.count" = "1");
 
 -- INSERT INTO TABLE trg.trg
-CREATE TABLE trg.trg AS
+CREATE TABLE trg.tmp AS
 SELECT c.*,
        cr.region,
        cr.`sub-region`,
@@ -47,5 +48,9 @@ FROM trg.cars c
                    ON mydc.firstSeen = c.firstSeen AND mydc.lastSeen = c.lastSeen AND mydc.modelName = c.modelName AND
                       mydc.vf_ModelYear = c.vf_ModelYear
          LEFT JOIN trg.country_regions cr ON cr.vf_PlantCountry = c.vf_PlantCountry
--- LIMIT 10
+-- LIMIT 100
 ;
+
+CREATE TABLE trg.trg AS
+SELECT DISTINCT * FROM trg.tmp;
+DROP TABLE IF EXISTS trg.tmp;

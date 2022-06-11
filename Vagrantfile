@@ -6,11 +6,12 @@ Vagrant.configure("2") do |config|
     config.ssh.extra_args = ["-t", "cd /vagrant/hadoop-eco/docker-script; bash --login"]
 
   config.vm.provider "virtualbox" do |vb|
-    vb.memory = "8192"
+    vb.memory = "16384"
     vb.cpus = "2"
   end
 
   config.vm.define "docker" do |docker|
+     docker.vm.disk :disk, size: "160GB", primary: true
      docker.vm.network "forwarded_port", guest: 20, host: 20
      docker.vm.network "forwarded_port", guest: 21, host: 21
      docker.vm.network "forwarded_port", guest: 3306, host: 3306

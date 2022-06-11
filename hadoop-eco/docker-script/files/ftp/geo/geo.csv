@@ -66,6 +66,7 @@ Dominican Republic,DO,DOM,214,ISO 3166-2:DO,Americas,Latin America and the Carib
 Ecuador,EC,ECU,218,ISO 3166-2:EC,Americas,Latin America and the Caribbean,South America,19,419,5
 Egypt,EG,EGY,818,ISO 3166-2:EG,Africa,Northern Africa,,2,15,
 El Salvador,SV,SLV,222,ISO 3166-2:SV,Americas,Latin America and the Caribbean,Central America,19,419,13
+England,GB,GBR,826,ISO 3166-2:GB,Europe,Northern Europe,,150,154,
 Equatorial Guinea,GQ,GNQ,226,ISO 3166-2:GQ,Africa,Sub-Saharan Africa,Middle Africa,2,202,17
 Eritrea,ER,ERI,232,ISO 3166-2:ER,Africa,Sub-Saharan Africa,Eastern Africa,2,202,14
 Estonia,EE,EST,233,ISO 3166-2:EE,Europe,Northern Europe,,150,154,
@@ -234,6 +235,7 @@ Uganda,UG,UGA,800,ISO 3166-2:UG,Africa,Sub-Saharan Africa,Eastern Africa,2,202,1
 Ukraine,UA,UKR,804,ISO 3166-2:UA,Europe,Eastern Europe,,150,151,
 United Arab Emirates,AE,ARE,784,ISO 3166-2:AE,Asia,Western Asia,,142,145,
 United Kingdom,GB,GBR,826,ISO 3166-2:GB,Europe,Northern Europe,,150,154,
+United Kingdom (UK),GB,GBR,826,ISO 3166-2:GB,Europe,Northern Europe,,150,154,
 United States,US,USA,840,ISO 3166-2:US,Americas,Northern America,,19,21,
 United States Minor Outlying Islands,UM,UMI,581,ISO 3166-2:UM,Oceania,Micronesia,,9,57,
 Uruguay,UY,URY,858,ISO 3166-2:UY,Americas,Latin America and the Caribbean,South America,19,419,5

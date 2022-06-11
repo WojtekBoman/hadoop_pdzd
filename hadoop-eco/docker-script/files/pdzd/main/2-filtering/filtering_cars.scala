@@ -22,7 +22,7 @@ fs.delete(new Path("hdfs://master:9000" + args(2)), true)
 val cars = spark.read.option("header",true).csv("hdfs://master:9000" + args(0))
 cars.select(col("vin"), col("stockNum"), col("firstSeen"), col("lastSeen"), col("msrp"), col("askPrice"), col("mileage"),
   col("isNew"), col("brandName"), col("modelName"), col("vf_BasePrice"), col("vf_BodyClass"), col("vf_FuelTypePrimary"),
-  col("vf_ModelYear"), col("vf_PlantCountry"), col("vf_EngineModel") ).distinct().write.option("header",true).option("emptyValue",null).csv("hdfs://master:9000/" + args(1))
+  col("vf_ModelYear"), col("vf_PlantCountry"), col("vf_EngineModel"), col("vf_TransmissionStyle") ).distinct().write.option("header",true).option("emptyValue",null).csv("hdfs://master:9000/" + args(1))
 
 //val file = fs.globStatus(new Path("hdfs://master:9000" + args(1) + "/part*"))(0).getPath().getName()
 //fs.rename(new Path("hdfs://master:9000" + args(1) + "/" + file), new Path("hdfs://master:9000" + args(2)))

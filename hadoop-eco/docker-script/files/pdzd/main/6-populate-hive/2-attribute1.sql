@@ -4,11 +4,13 @@ CREATE TABLE trg.price_diffs
 (
     msrp          int,
     askPrice      int,
-    priceDiffPerc double
+    priceDiffPerc double,
+    constraint price_diffs_pk
+        primary key (msrp, askPrice) disable novalidate
 )
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
     TBLPROPERTIES ("skip.header.line.count" = "1");
 
-LOAD DATA INPATH '/tmps/hive_tmp1.csv' INTO TABLE trg.price_diffs;
+LOAD DATA INPATH '/tmps/tmp1/*.csv' INTO TABLE trg.price_diffs;
 
 -- SELECT count(*) FROM trg.price_diffs;

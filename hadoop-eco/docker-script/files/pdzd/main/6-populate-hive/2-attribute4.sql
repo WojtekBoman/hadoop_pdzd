@@ -9,4 +9,4 @@ CREATE TABLE trg.country_regions
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
     TBLPROPERTIES ("skip.header.line.count" = "1");
 
-LOAD DATA INPATH '/tmps/hive_tmp4.csv' INTO TABLE trg.country_regions;
+LOAD DATA INPATH '/tmps/tmp4/*.csv' INTO TABLE trg.country_regions;

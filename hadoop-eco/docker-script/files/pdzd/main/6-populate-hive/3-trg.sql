@@ -53,4 +53,5 @@ FROM trg.cars c
 
 CREATE TABLE trg.trg AS
 SELECT DISTINCT * FROM trg.tmp;
+
 DROP TABLE IF EXISTS trg.tmp;

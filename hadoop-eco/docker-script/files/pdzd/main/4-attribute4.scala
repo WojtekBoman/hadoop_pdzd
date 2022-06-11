@@ -12,9 +12,9 @@ val w = Window.partitionBy($"vf_PlantCountry").orderBy($"vf_PlantCountry")
 val joined =  cars.join(geo, Seq("vf_PlantCountry"),"left_outer").select("vf_PlantCountry","region","sub-region").withColumn("row", row_number.over(w)).where($"row" === 1).drop("row")
 joined.repartition(1).write.option("header",true).csv("hdfs://master:9000/tmps/tmp4")
 
-val fs = FileSystem.get(sc.hadoopConfiguration)
-val file = fs.globStatus(new Path("hdfs://master:9000/tmps/tmp4/part*"))(0).getPath().getName()
-fs.rename(new Path("hdfs://master:9000/tmps/tmp4/" + file), new Path("hdfs://master:9000/tmps/tmp4.csv"))
-fs.delete(new Path("hdfs://master:9000/tmps/tmp4"), true)
+//val fs = FileSystem.get(sc.hadoopConfiguration)
+//val file = fs.globStatus(new Path("hdfs://master:9000/tmps/tmp4/part*"))(0).getPath().getName()
+//fs.rename(new Path("hdfs://master:9000/tmps/tmp4/" + file), new Path("hdfs://master:9000/tmps/tmp4.csv"))
+//fs.delete(new Path("hdfs://master:9000/tmps/tmp4"), true)
 
 System.exit(0)

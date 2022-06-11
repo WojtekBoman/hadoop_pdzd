@@ -23,10 +23,10 @@ val df = spark.read.option("header",true).csv("hdfs://master:9000/cars/cars.csv"
 val df_1 = operation_3a(df)
 val df_2 = operation_3b(df_1)
 
-df_2.write.format("csv").option("header","true").save("hdfs://master:9000/tmps/tmp3")
-
-val fs = FileSystem.get(sc.hadoopConfiguration)
-val file = fs.globStatus(new Path("hdfs://master:9000/tmps/tmp3/part*"))(0).getPath().getName()
-fs.rename(new Path("hdfs://master:9000/tmps/tmp3/" + file), new Path("hdfs://master:9000/tmps/tmp3.csv"))
-fs.delete(new Path("hdfs://master:9000/tmps/tmp3"), true)
+df_2.distinct().write.format("csv").option("header","true").save("hdfs://master:9000/tmps/tmp3")
+//
+//val fs = FileSystem.get(sc.hadoopConfiguration)
+//val file = fs.globStatus(new Path("hdfs://master:9000/tmps/tmp3/part*"))(0).getPath().getName()
+//fs.rename(new Path("hdfs://master:9000/tmps/tmp3/" + file), new Path("hdfs://master:9000/tmps/tmp3.csv"))
+//fs.delete(new Path("hdfs://master:9000/tmps/tmp3"), true)
 

@@ -12,4 +12,4 @@ CREATE TABLE trg.mileage_groups
 ROW FORMAT DELIMITED FIELDS TERMINATED BY ','
     TBLPROPERTIES ("skip.header.line.count" = "1");
 
-LOAD DATA INPATH '/tmps/tmp2_out' INTO TABLE trg.mileage_groups;
+LOAD DATA INPATH '/tmps/tmp2_out/*.csv' INTO TABLE trg.mileage_groups;
